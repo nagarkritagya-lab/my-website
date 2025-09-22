@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LMS Sign Up</title>
+  <link rel="stylesheet" href="style1.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Create Account</h2>
+    <form action="/register" method="POST">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      <input type="checkbox" onclick="togglePassword()"> Show Password
+      <small id="strengthText" class="strength-text"></small>
+
+      <button type="submit">Sign Up</button>
+      <p class="register-link">Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+
+    document.getElementById("password").addEventListener("input", function() {
+      const strengthText = document.getElementById("strengthText");
+      const val = this.value;
+      let strength = "Weak";
+      if (val.length > 8 && /[A-Z]/.test(val) && /\d/.test(val) && /[!@#\$%\^&\*]/.test(val)) {
+        strength = "Strong";
+      } else if (val.length >= 6) {
+        strength = "Moderate";
+      }
+      strengthText.textContent = Password Strength: ${strength};
+      strengthText.style.color = strength === "Strong" ? "green" : strength === "Moderate" ? "orange" : "red";
+    });
+  </script>
+</body>
+</html>
